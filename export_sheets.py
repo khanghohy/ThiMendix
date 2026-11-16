@@ -125,7 +125,12 @@ def create_sheet(title, questions_list):
 print("Creating Master Sheet: Tong_Hop_314_Cau...")
 create_sheet('Tong_Hop_314_Cau', u314)
 
-# 2. Individual Exam sheets
+# 2. Shared Wrong Questions sheet (Cau_Sai)
+print("Creating Sheet: Cau_Sai (3 câu)...")
+wrong_qs = [q for q in u314 if q['id'] in [75, 157, 265]]
+create_sheet('Cau_Sai', wrong_qs)
+
+# 3. Individual Exam sheets
 sheet_map = [
     ('De_1_50_Cau', '1'),
     ('De_2_50_Cau', '2'),

@@ -1609,9 +1609,10 @@
       </div>
       <div class="modal-body">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-          <div class="text-sm text-muted" id="wrongLogModalSub">Danh sách câu sai cần ôn luyện:</div>
+          <div class="text-sm text-muted" id="wrongLogModalSub">Danh sách câu sai cần ôn luyện (Đồng bộ chung):</div>
           <div class="flex gap-2">
             <button class="btn btn-sm" onclick="practiceWrongLogNow()">🚀 Bắt đầu luyện ngay</button>
+            <button class="btn-sec btn-sm" onclick="resetToGlobalWrongBank()" title="Nạp lại danh sách câu sai chung mặc định cho mọi người">🌐 Câu sai chung</button>
             <button class="btn-sec btn-sm" onclick="clearWrongBank()" style="color: var(--bad);">🗑️ Xóa hết log sai</button>
           </div>
         </div>
@@ -1709,6 +1710,9 @@
     const KEY_HISTORY = 'mendix_history';
     const KEY_MASTERED = 'mendix_mastered_map';
     const KEY_REMOVE_MASTERED = 'mendix_remove_mastered';
+
+    // GLOBAL SHARED WRONG BANK (Đồng bộ câu sai chung cho tất cả mọi người khi truy cập web)
+    const DEFAULT_GLOBAL_WRONG_BANK = [75, 157, 265];
 
     // APP STATE
     let currentMode = 'study'; // 'study' | 'exam'
@@ -1842,11 +1846,28 @@
       }
       updateSyncUI();
 
-      // Load wrong bank & bookmarks
+      // Load wrong bank & bookmarks (Đồng bộ câu sai chung)
       try {
-        const wb = JSON.parse(localStorage.getItem(KEY_WRONG_BANK) || '[]');
+        const storedWb = localStorage.getItem(KEY_WRONG_BANK);
+        let wb = [];
+        if (storedWb !== null) {
+          wb = JSON.parse(storedWb);
+          // Nếu danh sách rỗng (như người dùng mới mở trên máy/thiết bị khác), tự nạp câu sai chung
+          if (!wb.length && DEFAULT_GLOBAL_WRONG_BANK.length) {
+            wb = DEFAULT_GLOBAL_WRONG_BANK;
+            localStorage.setItem(KEY_WRONG_BANK, JSON.stringify(wb));
+          }
+        } else {
+          wb = DEFAULT_GLOBAL_WRONG_BANK;
+          localStorage.setItem(KEY_WRONG_BANK, JSON.stringify(wb));
+        }
         wrongBankSet = new Set(wb.map(Number).filter(n => !isNaN(n) && n > 0));
-      } catch (e) { wrongBankSet = new Set(); }
+      } catch (e) {
+        wrongBankSet = new Set(DEFAULT_GLOBAL_WRONG_BANK);
+      }
+
+      // Tự động kiểm tra và đồng bộ thêm từ Google Sheets nếu có tab Cau_Sai
+      autoSyncWrongBankFromSheet();
 
       try {
         const bm = JSON.parse(localStorage.getItem(KEY_BOOKMARKS) || '[]');
@@ -3060,6 +3081,42 @@
       closeWrongLogModal();
       selectSet('wrong_bank');
       startQuiz();
+    }
+
+    function resetToGlobalWrongBank() {
+      wrongBankSet = new Set(DEFAULT_GLOBAL_WRONG_BANK);
+      saveWrongBank();
+      renderWrongLogList();
+      updateBankCounters();
+    }
+
+    // Tự động kiểm tra và đồng bộ danh sách câu sai chung từ Google Sheets nếu có tab Cau_Sai
+    async function autoSyncWrongBankFromSheet() {
+      const sheetId = extractSheetId(localStorage.getItem(KEY_CUSTOM_SHEET_ID) || DEFAULT_SHEET_ID);
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Cau_Sai`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const csvText = await res.text();
+          if (csvText && csvText.length > 5) {
+            const rows = parseCSV(csvText);
+            const ids = [];
+            for (let r = 0; r < rows.length; r++) {
+              const val = parseInt(rows[r][0], 10);
+              if (!isNaN(val) && val > 0 && val <= 314) {
+                ids.push(val);
+              }
+            }
+            if (ids.length) {
+              wrongBankSet = new Set(ids);
+              saveWrongBank();
+              updateBankCounters();
+              const sub = document.getElementById('wrongLogModalSub');
+              if (sub) sub.textContent = `Danh sách ${ids.length} câu hỏi làm sai chung (Đồng bộ từ Google Sheets):`;
+            }
+          }
+        }
+      } catch (e) {}
     }
 
     // ==========================================
