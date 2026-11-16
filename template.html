@@ -1116,10 +1116,13 @@
         <span class="logo-badge">MENDIX</span>
         <div>
           <div class="logo-title">Ôn Thi Advanced</div>
-          <div class="logo-sub">Ngân hàng 111 câu & Đề thi chuẩn</div>
+          <div class="logo-sub" id="logoSubtitle">Ngân hàng 314 câu & Đề thi chuẩn</div>
         </div>
       </div>
       <div class="actions-area">
+        <button class="icon-btn" onclick="openSyncModal()" title="Đồng bộ dữ liệu Google Sheets (Online / Offline)" id="topSyncBtn">
+          🔄 <span id="topSyncBadge" style="font-weight: 700; color: var(--tx-mut);">Offline</span> <span class="hide-mobile">Google Sheets</span>
+        </button>
         <button class="icon-btn" onclick="openWrongLogModal()" title="Xem Log các câu hỏi đã chọn sai" style="border-color: var(--bad-border);">
           ❌ <span id="topWrongBadge" style="font-weight: 700; color: var(--bad);">0</span> <span class="hide-mobile">câu sai</span>
         </button>
@@ -1617,11 +1620,80 @@
     </div>
   </div>
 
+  <!-- SYNC MODAL -->
+  <div class="modal-overlay" id="syncModal" onclick="closeSyncModal(event)">
+    <div class="modal-card" style="max-width: 680px;" onclick="event.stopPropagation()">
+      <div class="modal-head">
+        <h3 style="font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+          🔄 Đồng Bộ Dữ Liệu Google Sheets (Online / Offline)
+        </h3>
+        <button class="icon-btn" onclick="closeSyncModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- STATUS BANNER -->
+        <div id="syncStatusBanner" style="padding: 14px 16px; border-radius: 8px; margin-bottom: 16px; background: var(--pri-light); border: 1px solid var(--pri-border);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span id="syncStatusDot" style="width: 10px; height: 10px; border-radius: 50%; background: #64748b; display: inline-block;"></span>
+              <strong id="syncStatusTitle" style="font-size: 14px;">Dữ liệu ngoại tuyến tích hợp sẵn (Offline)</strong>
+            </div>
+            <span id="syncQuestionCountBadge" class="quiz-tag">314 câu hỏi</span>
+          </div>
+          <div id="syncStatusDetail" style="font-size: 12px; color: var(--tx-mut); margin-top: 6px;">
+            Ứng dụng luôn hoạt động 100% không cần mạng (Offline). Bạn có thể bấm "Đồng bộ ngay" để cập nhật câu hỏi mới nhất từ Google Sheets bất cứ lúc nào.
+          </div>
+        </div>
+
+        <!-- FORM INPUT GOOGLE SHEET -->
+        <div class="form-group">
+          <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>ID hoặc Link Google Sheets:</span>
+            <a href="https://docs.google.com/spreadsheets/d/1h-DtUIyo4JRCzHHXo_4ext1L5fUsMu5bMc56Td1LLzY/edit" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--pri); text-decoration: none; font-weight: 600;">
+              ↗ Mở Google Sheets của bạn
+            </a>
+          </label>
+          <input type="text" id="syncSheetInput" value="1h-DtUIyo4JRCzHHXo_4ext1L5fUsMu5bMc56Td1LLzY" placeholder="Nhập Google Sheet ID hoặc dán toàn bộ đường link Google Sheet...">
+          <div class="text-sm text-muted" style="margin-top: 4px; font-size: 12px;">
+            Mặc định là bảng tính: <code>Đề mendix</code> của bạn.
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+          <button class="btn" id="btnSyncNow" onclick="triggerSyncFromSheet()" style="flex: 1; min-width: 200px;">
+            <span id="syncBtnIcon">🔄</span> Đồng bộ ngay từ Google Sheet
+          </button>
+          <a class="btn-sec" href="./De_Mendix_Advanced_314_Cau_Hoi.xlsx" download="De_Mendix_Advanced_314_Cau_Hoi.xlsx" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Tải file Excel đầy đủ 8 sheet để import vào Google Sheets">
+            📥 Tải file Excel mẫu (.xlsx)
+          </a>
+          <button class="btn-sec" onclick="resetToBuiltinData()" style="color: var(--bad);" title="Xóa cache đồng bộ và khôi phục về dữ liệu tích hợp sẵn">
+            ↺ Khôi phục gốc
+          </button>
+        </div>
+
+        <!-- SYNC LOG / FEEDBACK BOX -->
+        <div id="syncFeedbackBox" style="display: none; padding: 12px; border-radius: 6px; font-size: 13px; margin-bottom: 16px;"></div>
+
+        <!-- INSTRUCTIONS ACCORDION -->
+        <div class="card" style="background: var(--card-muted); border: 1px solid var(--bd); padding: 14px 16px; margin: 0;">
+          <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">📋 Hướng dẫn đưa 314 câu hỏi lên Google Sheets:</h4>
+          <ol style="margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.7; color: var(--tx);">
+            <li>Bấm nút <strong>📥 Tải file Excel mẫu (.xlsx)</strong> ở trên để tải file <code>De_Mendix_Advanced_314_Cau_Hoi.xlsx</code> về máy.</li>
+            <li>Mở Google Sheet của bạn &gt; Chọn <strong>Tệp (File)</strong> &gt; <strong>Nhập (Import)</strong> &gt; Tab <strong>Tải lên (Upload)</strong> &gt; Chọn file Excel vừa tải.</li>
+            <li>Chọn <strong>"Thay thế trang tính hiện tại" (Replace spreadsheet)</strong> rồi bấm <strong>Nhập dữ liệu</strong> (Sẽ có đủ 8 tab: master 314 câu + 7 đề thi).</li>
+            <li>Bấm nút <strong>Chia sẻ (Share)</strong> góc trên bên phải Google Sheets &gt; Đổi quyền truy cập chung sang: <strong>"Bất kỳ ai có đường liên kết đều có thể xem" (Anyone with the link can view)</strong>.</li>
+            <li>Quay lại đây bấm <strong>🔄 Đồng bộ ngay từ Google Sheet</strong>. Ứng dụng sẽ tự động nạp toàn bộ câu hỏi và lưu vào bộ nhớ cache để bạn học tập cả online lẫn offline!</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- EMBEDDED DATA PLACEHOLDER -->
   <script>
-    const DATA_EXAMS = /*__DATA_EXAMS__*/;
-    const DATA_UNIQUE_111 = /*__DATA_UNIQUE_111__*/;
-    const DATA_UNIQUE_ALL = /*__DATA_UNIQUE_314__*/;
+    let DATA_EXAMS = /*__DATA_EXAMS__*/;
+    let DATA_UNIQUE_111 = /*__DATA_UNIQUE_111__*/;
+    let DATA_UNIQUE_ALL = /*__DATA_UNIQUE_314__*/;
   </script>
 
   <!-- CORE LOGIC SCRIPT -->
@@ -1743,8 +1815,32 @@
         document.getElementById('shuffleOptionsToggle').checked = (savedShuffleOptions === '1');
       }
 
+      // Clone immutable built-in data on first run
+      if (!BUILTIN_DATA_UNIQUE_ALL) {
+        BUILTIN_DATA_UNIQUE_ALL = JSON.parse(JSON.stringify(DATA_UNIQUE_ALL));
+        BUILTIN_DATA_EXAMS = JSON.parse(JSON.stringify(DATA_EXAMS));
+      }
+
+      // Load synced data from Google Sheets if exists
+      try {
+        const cachedSynced = localStorage.getItem(KEY_SYNCED_QUESTIONS);
+        if (cachedSynced) {
+          const parsed = JSON.parse(cachedSynced);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            applySyncedQuestions(parsed);
+          }
+        }
+      } catch (e) {}
+
       // Canonical Mapping
       initCanonicalIds();
+
+      const savedSheetId = localStorage.getItem(KEY_CUSTOM_SHEET_ID);
+      if (savedSheetId) {
+        const inputEl = document.getElementById('syncSheetInput');
+        if (inputEl) inputEl.value = savedSheetId;
+      }
+      updateSyncUI();
 
       // Load wrong bank & bookmarks
       try {
@@ -2964,6 +3060,313 @@
       closeWrongLogModal();
       selectSet('wrong_bank');
       startQuiz();
+    }
+
+    // ==========================================
+    // GOOGLE SHEETS SYNC SYSTEM (ONLINE / OFFLINE)
+    // ==========================================
+    const KEY_SYNCED_QUESTIONS = 'mendix_synced_questions_v1';
+    const KEY_LAST_SYNC_TIME = 'mendix_last_sync_time';
+    const KEY_CUSTOM_SHEET_ID = 'mendix_google_sheet_id';
+    const DEFAULT_SHEET_ID = '1h-DtUIyo4JRCzHHXo_4ext1L5fUsMu5bMc56Td1LLzY';
+
+    let BUILTIN_DATA_UNIQUE_ALL = null;
+    let BUILTIN_DATA_EXAMS = null;
+
+    function openSyncModal() {
+      document.getElementById('syncModal').classList.add('open');
+      updateSyncUI();
+    }
+
+    function closeSyncModal(event) {
+      if (!event || event.target.id === 'syncModal' || event.target.tagName === 'BUTTON') {
+        document.getElementById('syncModal').classList.remove('open');
+      }
+    }
+
+    function extractSheetId(input) {
+      if (!input) return DEFAULT_SHEET_ID;
+      input = input.trim();
+      const m = input.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+      if (m && m[1]) return m[1];
+      return input;
+    }
+
+    function parseCSV(text) {
+      const p = [];
+      let row = [''];
+      let inQuotes = false;
+      let i = 0;
+      while (i < text.length) {
+        const c = text[i];
+        const next = text[i + 1];
+        if (c === '"') {
+          if (inQuotes && next === '"') {
+            row[row.length - 1] += '"';
+            i += 2;
+            continue;
+          }
+          inQuotes = !inQuotes;
+          i++;
+          continue;
+        }
+        if (c === ',' && !inQuotes) {
+          row.push('');
+          i++;
+          continue;
+        }
+        if ((c === '\r' || c === '\n') && !inQuotes) {
+          if (c === '\r' && next === '\n') i++;
+          p.push(row);
+          row = [''];
+          i++;
+          continue;
+        }
+        row[row.length - 1] += c;
+        i++;
+      }
+      if (row.length > 1 || row[0] !== '') p.push(row);
+      return p;
+    }
+
+    function rowsToQuestions(rows) {
+      const qs = [];
+      for (let r = 1; r < rows.length; r++) {
+        const row = rows[r];
+        if (!row || row.length < 4) continue;
+        const qText = (row[3] || '').trim();
+        if (!qText) continue;
+        const id = parseInt(row[0], 10) || r;
+        const topic = (row[1] || 'General').trim();
+        const appeared = (row[2] || '').split(',').map(s => s.trim()).filter(Boolean);
+        const opts = [];
+        const keys = ['A', 'B', 'C', 'D', 'E', 'F'];
+        for (let k = 0; k < keys.length; k++) {
+          const optText = (row[4 + k] || '').trim();
+          if (optText) {
+            opts.push({ k: keys[k], t: optText });
+          }
+        }
+        const rawAns = (row[10] || '').trim().toUpperCase();
+        const ans = rawAns.split(/[,;\s]+/).map(s => s.trim()).filter(s => ['A','B','C','D','E','F'].includes(s));
+        const exp = (row[11] || '').trim();
+        qs.push({
+          id,
+          canonicalId: id,
+          topic,
+          q: qText,
+          opts,
+          ans: ans.length ? ans : ['A'],
+          exp,
+          appeared_in_exams: appeared
+        });
+      }
+      return qs;
+    }
+
+    function applySyncedQuestions(qs) {
+      if (!Array.isArray(qs) || !qs.length) return;
+      DATA_UNIQUE_ALL = qs;
+      CANONICAL_MAP.clear();
+      initCanonicalIds();
+
+      // Đồng bộ nội dung vào các đề thi nếu câu hỏi khớp canonicalId
+      for (const examKey in DATA_EXAMS) {
+        DATA_EXAMS[examKey].forEach(eq => {
+          const norm = normalizeKey(eq.q);
+          const cid = CANONICAL_MAP.get(norm);
+          if (cid) {
+            const master = DATA_UNIQUE_ALL.find(mq => mq.canonicalId === cid);
+            if (master) {
+              eq.q = master.q;
+              eq.opts = master.opts;
+              eq.ans = master.ans;
+              eq.exp = master.exp;
+              eq.topic = master.topic;
+            }
+          }
+        });
+      }
+
+      updateBankCounters();
+      updateMasteryCounters();
+    }
+
+    async function triggerSyncFromSheet() {
+      const inputEl = document.getElementById('syncSheetInput');
+      const sheetId = extractSheetId(inputEl ? inputEl.value : '');
+      localStorage.setItem(KEY_CUSTOM_SHEET_ID, sheetId);
+
+      const btn = document.getElementById('btnSyncNow');
+      const icon = document.getElementById('syncBtnIcon');
+      const feedback = document.getElementById('syncFeedbackBox');
+      
+      if (btn) btn.disabled = true;
+      if (icon) icon.textContent = '⏳';
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--card-muted)';
+        feedback.style.color = 'var(--tx)';
+        feedback.innerHTML = 'Đang kết nối và tải dữ liệu từ Google Sheets...';
+      }
+
+      const urls = [
+        `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=TongHop_314_Cau`,
+        `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`
+      ];
+
+      let csvText = null;
+      let lastError = null;
+
+      for (const u of urls) {
+        try {
+          const res = await fetch(u);
+          if (res.ok) {
+            const txt = await res.text();
+            if (txt && txt.length > 50) {
+              csvText = txt;
+              break;
+            }
+          }
+        } catch (err) {
+          lastError = err;
+        }
+      }
+
+      if (btn) btn.disabled = false;
+      if (icon) icon.textContent = '🔄';
+
+      if (!csvText) {
+        if (feedback) {
+          feedback.style.display = 'block';
+          feedback.style.background = 'var(--bad-light)';
+          feedback.style.color = 'var(--bad)';
+          feedback.innerHTML = `
+            <strong>❌ Đồng bộ chưa thành công:</strong> Không thể tải bảng tính từ Google Sheets.<br>
+            <div style="font-size: 12px; margin-top: 6px; line-height: 1.6;">
+              <strong>Cách xử lý:</strong><br>
+              1. Trang tính cần được chia sẻ công khai: Mở Google Sheet &gt; Bấm <strong>Chia sẻ (Share)</strong> &gt; Chọn <strong>"Bất kỳ ai có đường liên kết đều có thể xem"</strong>.<br>
+              2. Đảm bảo bạn đã đưa dữ liệu vào Google Sheet (từ file <code>De_Mendix_Advanced_314_Cau_Hoi.xlsx</code>).<br>
+              3. Khi không có mạng, ứng dụng vẫn an toàn tiếp tục sử dụng dữ liệu Offline có sẵn.
+            </div>
+          `;
+        }
+        return;
+      }
+
+      try {
+        const rows = parseCSV(csvText);
+        const parsedQs = rowsToQuestions(rows);
+        if (parsedQs.length < 5) {
+          if (feedback) {
+            feedback.style.display = 'block';
+            feedback.style.background = 'var(--warn-light)';
+            feedback.style.color = 'var(--warn)';
+            feedback.innerHTML = `⚠️ Dữ liệu tải về từ Google Sheets chỉ có ${parsedQs.length} câu hỏi hợp lệ. Vui lòng kiểm tra lại sheet <code>TongHop_314_Cau</code> hoặc nhập file Excel mẫu trước.`;
+          }
+          return;
+        }
+
+        // Lưu vào localStorage
+        localStorage.setItem(KEY_SYNCED_QUESTIONS, JSON.stringify(parsedQs));
+        const nowStr = new Date().toLocaleString('vi-VN');
+        localStorage.setItem(KEY_LAST_SYNC_TIME, nowStr);
+
+        applySyncedQuestions(parsedQs);
+
+        if (feedback) {
+          feedback.style.display = 'block';
+          feedback.style.background = 'var(--ok-light)';
+          feedback.style.color = 'var(--ok)';
+          feedback.innerHTML = `<strong>✓ Đồng bộ thành công!</strong> Đã nạp <strong>${parsedQs.length}</strong> câu hỏi từ Google Sheets (Lúc ${nowStr}). Dữ liệu đã lưu vào bộ nhớ máy và luôn sẵn sàng dùng cả Online lẫn Offline!`;
+        }
+        updateSyncUI();
+      } catch (e) {
+        if (feedback) {
+          feedback.style.display = 'block';
+          feedback.style.background = 'var(--bad-light)';
+          feedback.style.color = 'var(--bad)';
+          feedback.innerHTML = `<strong>❌ Lỗi xử lý dữ liệu:</strong> ${e.message}`;
+        }
+      }
+    }
+
+    function resetToBuiltinData() {
+      if (!confirm('Bạn có chắc muốn khôi phục về dữ liệu tích hợp gốc (314 câu)? Mọi câu hỏi đã đồng bộ từ Google Sheets sẽ bị xoá khỏi bộ nhớ cache.')) {
+        return;
+      }
+      localStorage.removeItem(KEY_SYNCED_QUESTIONS);
+      localStorage.removeItem(KEY_LAST_SYNC_TIME);
+      if (BUILTIN_DATA_UNIQUE_ALL) {
+        DATA_UNIQUE_ALL = JSON.parse(JSON.stringify(BUILTIN_DATA_UNIQUE_ALL));
+      }
+      if (BUILTIN_DATA_EXAMS) {
+        DATA_EXAMS = JSON.parse(JSON.stringify(BUILTIN_DATA_EXAMS));
+      }
+      CANONICAL_MAP.clear();
+      initCanonicalIds();
+      updateBankCounters();
+      updateMasteryCounters();
+      updateSyncUI();
+
+      const feedback = document.getElementById('syncFeedbackBox');
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.background = 'var(--ok-light)';
+        feedback.style.color = 'var(--ok)';
+        feedback.innerHTML = '✓ Đã khôi phục thành công về dữ liệu gốc tích hợp sẵn (Offline - 314 câu)!';
+      }
+    }
+
+    function updateSyncUI() {
+      const hasSynced = !!localStorage.getItem(KEY_SYNCED_QUESTIONS);
+      const lastTime = localStorage.getItem(KEY_LAST_SYNC_TIME);
+      const topBadge = document.getElementById('topSyncBadge');
+      const topBtn = document.getElementById('topSyncBtn');
+      const bannerTitle = document.getElementById('syncStatusTitle');
+      const bannerDetail = document.getElementById('syncStatusDetail');
+      const dot = document.getElementById('syncStatusDot');
+      const countBadge = document.getElementById('syncQuestionCountBadge');
+
+      if (countBadge) {
+        countBadge.textContent = DATA_UNIQUE_ALL.length + ' câu hỏi';
+      }
+
+      if (hasSynced) {
+        if (topBadge) {
+          topBadge.textContent = 'Sheets ✓';
+          topBadge.style.color = 'var(--ok)';
+        }
+        if (topBtn) {
+          topBtn.title = `Đang dùng dữ liệu từ Google Sheets (Đồng bộ lúc ${lastTime || ''})`;
+        }
+        if (bannerTitle) {
+          bannerTitle.textContent = 'Đang dùng dữ liệu trực tuyến từ Google Sheets';
+        }
+        if (bannerDetail) {
+          bannerDetail.innerHTML = `Lần đồng bộ thành công gần nhất: <strong>${lastTime || 'Không rõ'}</strong>. Dữ liệu đã lưu vào bộ nhớ máy và luôn sẵn sàng hoạt động ngay cả khi ngoại tuyến (offline).`;
+        }
+        if (dot) {
+          dot.style.background = '#10b981';
+        }
+      } else {
+        if (topBadge) {
+          topBadge.textContent = 'Offline';
+          topBadge.style.color = 'var(--tx-mut)';
+        }
+        if (topBtn) {
+          topBtn.title = 'Đang dùng dữ liệu ngoại tuyến tích hợp sẵn (314 câu)';
+        }
+        if (bannerTitle) {
+          bannerTitle.textContent = 'Dữ liệu ngoại tuyến tích hợp sẵn (Offline)';
+        }
+        if (bannerDetail) {
+          bannerDetail.innerHTML = 'Ứng dụng đang hoạt động hoàn toàn ngoại tuyến không cần mạng (314 câu). Bạn có thể bấm "Đồng bộ ngay" để kết nối với Google Sheets.';
+        }
+        if (dot) {
+          dot.style.background = '#64748b';
+        }
+      }
     }
 
     // KEYBOARD SHORTCUTS

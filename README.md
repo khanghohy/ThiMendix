@@ -54,7 +54,12 @@
    - `→` hoặc `N`: Sang câu sau.
    - `←` hoặc `P`: Về câu trước.
    - `S`: Đánh dấu sao (Bookmark) câu hỏi để xem lại.
-8. **🌙 Chế Độ Giao Diện Tối (Dark Mode) & Âm Thanh Sinh Động**.
+8. **🔄 Đồng Bộ Hai Chiều Với Google Sheets (Online & Offline)**:
+   - Kết nối trực tiếp với bảng tính [Đề mendix - Google Trang tính](https://docs.google.com/spreadsheets/d/1h-DtUIyo4JRCzHHXo_4ext1L5fUsMu5bMc56Td1LLzY/edit).
+   - Xuất sẵn file **`De_Mendix_Advanced_314_Cau_Hoi.xlsx`** (8 sheet gồm 314 câu master và 7 đề thi) để import 10 giây lên Google Sheets.
+   - Nút **`🔄 Đồng bộ`** trên thanh công cụ giúp nạp ngay các câu hỏi hoặc sửa đổi mới nhất từ Google Sheets về ứng dụng web.
+   - Khi mất mạng hoặc offline, ứng dụng tự động chuyển sang dữ liệu ngoại tuyến an toàn.
+9. **🌙 Chế Độ Giao Diện Tối (Dark Mode) & Âm Thanh Sinh Động**.
 
 ---
 
@@ -78,6 +83,10 @@ Mở trực tiếp link: **[https://khanghohy.github.io/ThiMendix/](https://khan
 ├── Chay_Chuong_Trinh_Thi_Thu.bat        # File chạy nhanh 1-click cho Windows
 ├── Huong_dan_su_dung.md                 # Tài liệu hướng dẫn sử dụng chi tiết
 ├── README.md                            # Giới thiệu dự án & liên kết GitHub Pages
+│
+├── De_Mendix_Advanced_314_Cau_Hoi.xlsx   # File Excel 8 Sheet chuẩn bị để đưa lên Google Sheets
+├── De_Mendix_Tong_Hop_314_Cau.csv       # File CSV 314 câu hỏi chuẩn UTF-8
+├── export_sheets.py                     # Script tạo file Excel & CSV từ ngân hàng câu hỏi
 │
 ├── mendix_advanced_data.json            # Dữ liệu 7 bộ đề thi (Đề 1, 2, 3, Practice Test I, Set 1, Set 2, Learning Path)
 ├── mendix_advanced_unique_314.json      # Ngân hàng 314 câu hỏi độc nhất toàn diện

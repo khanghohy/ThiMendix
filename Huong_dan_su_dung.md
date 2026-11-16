@@ -77,9 +77,36 @@ Chương trình ôn thi trắc nghiệm chứng chỉ **Mendix Advanced Certific
 ---
 
 ## 🛠️ Tiện Ích Kèm Theo
+- **🔄 Đồng bộ Online & Offline với Google Sheets (Mới)**:
+  - Tích hợp 2 chiều với bảng tính [Đề mendix - Google Trang tính](https://docs.google.com/spreadsheets/d/1h-DtUIyo4JRCzHHXo_4ext1L5fUsMu5bMc56Td1LLzY/edit).
+  - Có sẵn file Excel hoàn chỉnh **`De_Mendix_Advanced_314_Cau_Hoi.xlsx`** (gồm 8 tab: tab tổng hợp 314 câu + 7 đề riêng) để import trực tiếp lên Google Sheets.
+  - Nút **`🔄 Đồng bộ`** trên thanh công cụ giúp nạp ngay các câu hỏi hoặc sửa đổi mới nhất từ Google Sheets về ứng dụng web.
+  - **Hoạt động trơn tru cả khi Offline**: Khi mất mạng, ứng dụng tự động dùng dữ liệu đã cache hoặc dữ liệu gốc tích hợp sẵn.
 - **🔍 Tra cứu câu hỏi nhanh**: Tìm kiếm theo từ khóa (XPath, rollback, index, reversed, inheritance...) trong toàn bộ 314 câu hỏi và lời giải.
 - **🔊 Hiệu ứng âm thanh**: Âm thanh báo Đúng / Sai sinh động (có thể bật/tắt).
 - **🌙 Chế độ Sáng / Tối (Dark Mode)**: Dễ chịu cho mắt khi ôn thi vào ban đêm.
 - **📊 Bảng phân tích năng lực theo từng chuyên đề**: Sau khi nộp bài, hệ thống hiển thị % chính xác của từng phần (Microflows, Security, XPath...) giúp bạn biết chính xác phần kiến thức nào cần cải thiện.
 - **📥 Xuất báo cáo CSV**: Tải lịch sử các lần thi về máy tính.
+
+---
+
+## 🌐 Hướng Dẫn Đưa Dữ Liệu Lên Google Sheets & Đồng Bộ
+
+### 1. Đưa 314 câu hỏi lên Google Sheets (Chỉ mất 10 giây):
+1. Mở file Google Sheets của bạn: [Đề mendix - Google Trang tính](https://docs.google.com/spreadsheets/d/1h-DtUIyo4JRCzHHXo_4ext1L5fUsMu5bMc56Td1LLzY/edit).
+2. Vào menu **Tệp (File)** > **Nhập (Import)** > chọn tab **Tải lên (Upload)**.
+3. Kéo thả file **`De_Mendix_Advanced_314_Cau_Hoi.xlsx`** (đã tạo sẵn trong thư mục dự án) vào khung tải lên.
+4. Chọn vị trí nhập là: **Thay thế trang tính hiện tại (Replace spreadsheet)** > Nhấn **Nhập dữ liệu (Import data)**.
+5. Toàn bộ 8 Sheet (Master 314 câu + 7 đề thi) sẽ hiển thị đầy đủ với định dạng chuẩn, cột rõ ràng và đáp án chi tiết.
+
+### 2. Thiết lập quyền để ứng dụng đọc được dữ liệu:
+- Trên Google Sheets, nhấn nút **Chia sẻ (Share)** ở góc trên bên phải.
+- Tại mục *Quyền truy cập chung*, đổi từ "Bị hạn chế" sang **"Bất kỳ ai có đường liên kết đều có thể xem" (Anyone with the link can view)** > Nhấn **Xong**.
+
+### 3. Đồng bộ với ứng dụng web:
+- Trên giao diện web thi thử (dù đang mở cục bộ offline hay qua GitHub Pages), bấm nút **`🔄 Đồng bộ`** trên thanh Topbar.
+- Nhấn **"🔄 Đồng bộ ngay từ Google Sheet"**.
+- Hệ thống sẽ nạp dữ liệu mới nhất, lưu vào bộ nhớ máy và tự động áp dụng cho các đề thi.
+- Khi không có mạng, bạn vẫn làm bài bình thường với dữ liệu offline!
+
 
