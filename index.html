@@ -1852,8 +1852,11 @@
         let wb = [];
         if (storedWb !== null) {
           wb = JSON.parse(storedWb);
-          // Nếu danh sách rỗng (như người dùng mới mở trên máy/thiết bị khác), tự nạp câu sai chung
-          if (!wb.length && DEFAULT_GLOBAL_WRONG_BANK.length) {
+          // Tự động sửa lỗi: Nếu trước đó bị nạp nhầm toàn bộ 314 câu, reset lại đúng 3 câu sai thực sự
+          if (wb.length >= 300) {
+            wb = DEFAULT_GLOBAL_WRONG_BANK;
+            localStorage.setItem(KEY_WRONG_BANK, JSON.stringify(wb));
+          } else if (!wb.length && DEFAULT_GLOBAL_WRONG_BANK.length) {
             wb = DEFAULT_GLOBAL_WRONG_BANK;
             localStorage.setItem(KEY_WRONG_BANK, JSON.stringify(wb));
           }
@@ -1865,9 +1868,6 @@
       } catch (e) {
         wrongBankSet = new Set(DEFAULT_GLOBAL_WRONG_BANK);
       }
-
-      // Tự động kiểm tra và đồng bộ thêm từ Google Sheets nếu có tab Cau_Sai
-      autoSyncWrongBankFromSheet();
 
       try {
         const bm = JSON.parse(localStorage.getItem(KEY_BOOKMARKS) || '[]');
@@ -3090,7 +3090,7 @@
       updateBankCounters();
     }
 
-    // Tự động kiểm tra và đồng bộ danh sách câu sai chung từ Google Sheets nếu có tab Cau_Sai
+    // Đồng bộ danh sách câu sai chung từ Google Sheets nếu có tab Cau_Sai riêng biệt
     async function autoSyncWrongBankFromSheet() {
       const sheetId = extractSheetId(localStorage.getItem(KEY_CUSTOM_SHEET_ID) || DEFAULT_SHEET_ID);
       try {
@@ -3100,6 +3100,12 @@
           const csvText = await res.text();
           if (csvText && csvText.length > 5) {
             const rows = parseCSV(csvText);
+            if (!rows || rows.length < 1) return;
+            // Kiểm tra bảo vệ: Nếu là tab chứa câu hỏi tổng hợp (chứa chữ "Topic", "Chủ đề" hoặc nhiều hơn 200 dòng), tuyệt đối không nhận!
+            const headerStr = (rows[0] || []).join(' ').toLowerCase();
+            if (headerStr.includes('topic') || headerStr.includes('chủ đề') || rows.length >= 200) {
+              return;
+            }
             const ids = [];
             for (let r = 0; r < rows.length; r++) {
               const val = parseInt(rows[r][0], 10);
@@ -3107,7 +3113,7 @@
                 ids.push(val);
               }
             }
-            if (ids.length) {
+            if (ids.length && ids.length < 100) {
               wrongBankSet = new Set(ids);
               saveWrongBank();
               updateBankCounters();
