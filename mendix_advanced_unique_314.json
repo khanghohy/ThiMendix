@@ -41,7 +41,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "The transaction is stopped and by default Mend will show this message in the user interface: ‘Something went wrong. Please contact your administrator'"
+        "t": "The transaction is stopped and by default Mendix will show this message in the user interface: ‘Something went wrong. Please contact your administrator'"
       },
       {
         "k": "B",
@@ -154,7 +154,7 @@
       },
       {
         "k": "C",
-        "t": "The change will not happen and an error message willbe shown in the client and the log."
+        "t": "The change will not happen and an error message will be shown in the client and the log."
       },
       {
         "k": "D",
@@ -280,7 +280,7 @@
   {
     "id": 9,
     "topic": "Microflows",
-    "q": "When an order is submitted, the Order and OrderLines will be committed to the database. Afterwards , the Customer should receive an email with the order details. Asa result. the Mendix developer adds the sub-microflow SUB_Order_SendCustomerEmail to the submit microflow. The developer wants to catch a possible error when sending an email so that the Order and OrderLines will definitely be committed. What type of error handling should the developer set on the C all microflow activity which calls the microflow SUB_Order_SendCustomerEmail?",
+    "q": "When an order is submitted, the Order and OrderLines will be committed to the database. Afterwards, the Customer should receive an email with the order details. As a result, the Mendix developer adds the sub-microflow SUB_Order_SendCustomerEmail to the submit microflow. The developer wants to catch a possible error when sending an email so that the Order and OrderLines will definitely be committed. What type of error handling should the developer set on the Call microflow activity which calls the microflow SUB_Order_SendCustomerEmail?",
     "opts": [
       {
         "k": "A",
@@ -315,7 +315,7 @@
   {
     "id": 10,
     "topic": "XPath & General",
-    "q": "You would like to replace an XPath that utes the logical 'and' operator with a microfiow using. two Retrieves and a List operation. Which of the following List operations should you use?",
+    "q": "You would like to replace an XPath that uses the logical 'and' operator with a microflow using two Retrieves and a List operation. Which of the following List operations should you use?",
     "opts": [
       {
         "k": "A",
@@ -327,7 +327,7 @@
       },
       {
         "k": "C",
-        "t": "Intersert"
+        "t": "Intersect"
       },
       {
         "k": "D",
@@ -607,7 +607,7 @@
       },
       {
         "k": "D",
-        "t": "Go to the properties of the text widget and set the the 'Spacing Bottom' property in Appearance to 'Outer None'."
+        "t": "Go to the properties of the text widget and set the 'Spacing Bottom' property in Appearance to 'Outer None'."
       }
     ],
     "ans": [
@@ -696,7 +696,7 @@
   {
     "id": 21,
     "topic": "XPath & General",
-    "q": "Mendix Academy needs to retrieve all trainees with a valid RAD certificate from their customer database. Luckily, all certificates are stored in the String attribute CertificatelD and have the prefix ‘RAD’. You build a Trainee_Overview page where you add a List view with a data source Trainee by XPath. Which XPath should you specify when retrieving the Trainee entity?",
+    "q": "Mendix Academy needs to retrieve all trainees with a valid RAD certificate from their customer database. Luckily, all certificates are stored in the String attribute CertificateID and have the prefix ‘RAD’. You build a Trainee_Overview page where you add a List view with a data source Trainee by XPath. Which XPath should you specify when retrieving the Trainee entity?",
     "opts": [
       {
         "k": "A",
@@ -704,15 +704,15 @@
       },
       {
         "k": "B",
-        "t": "[starts-with(CertificatelD, 'RAD')]"
+        "t": "[starts-with(CertificateID, 'RAD')]"
       },
       {
         "k": "C",
-        "t": "[starts-with(Trainee.CertificatelD, RAD)]"
+        "t": "[starts-with(Trainee.CertificateID, RAD)]"
       },
       {
         "k": "D",
-        "t": "[CertificatelD != empty and starts-with('RAD')]"
+        "t": "[CertificateID != empty and starts-with('RAD')]"
       }
     ],
     "ans": [
@@ -766,7 +766,7 @@
   {
     "id": 23,
     "topic": "XPath & General",
-    "q": "In a List view displaying a list of Orders, you want to add an XPath. The XPath should result in Orders where theOrderDate is within the past three years. Which XPath should you use?",
+    "q": "In a List view displaying a list of Orders, you want to add an XPath. The XPath should result in Orders where the OrderDate is within the past three years. Which XPath should you use?",
     "opts": [
       {
         "k": "A",
@@ -801,7 +801,7 @@
   {
     "id": 24,
     "topic": "Security",
-    "q": "What is the Mendix Clent?",
+    "q": "What is the Mendix Client?",
     "opts": [
       {
         "k": "A",
@@ -904,7 +904,7 @@
   {
     "id": 27,
     "topic": "UX & Logging",
-    "q": "You need your users to fill out a form with 40 input fields, but putting them all on one page creates a very confusing Ul. How can you simplify this form using Mendix best practices?",
+    "q": "You need your users to fill out a form with 40 input fields, but putting them all on one page creates a very confusing UI. How can you simplify this form using Mendix best practices?",
     "opts": [
       {
         "k": "A",
@@ -1157,7 +1157,7 @@
       },
       {
         "k": "C",
-        "t": "Use an on-change microflow to set the conditional editabilty of the relevant page elements."
+        "t": "Use an on-change microflow to set the conditional editability of the relevant page elements."
       },
       {
         "k": "D",
@@ -1184,11 +1184,11 @@
     "opts": [
       {
         "k": "A",
-        "t": "The Commit of the OrderlineList should happen before the sub- microfiow call."
+        "t": "The Commit of the OrderlineList should happen before the sub-microflow call."
       },
       {
         "k": "B",
-        "t": "The sub-microflow should return the OrderNumber variable. The Change and Commit of the Order object should be done in the main microfiow."
+        "t": "The sub-microflow should return the OrderNumber variable. The Change and Commit of the Order object should be done in the main microflow."
       },
       {
         "k": "C",
@@ -1318,7 +1318,7 @@
   {
     "id": 39,
     "topic": "XPath & General",
-    "q": "you need to create an Xpath query to look for customers with the company name Mendix. Which of the follwing suggestions represents a syntactically correct XPath ?",
+    "q": "You need to create an XPath query to look for customers with the company name Mendix. Which of the following suggestions represents a syntactically correct XPath?",
     "opts": [
       {
         "k": "A",
@@ -1351,7 +1351,7 @@
   {
     "id": 40,
     "topic": "Domain Model",
-    "q": "When is it likely that an index will negatively impact perfomance?",
+    "q": "When is it likely that an index will negatively impact performance?",
     "opts": [
       {
         "k": "A",
@@ -1398,11 +1398,11 @@
       },
       {
         "k": "C",
-        "t": "Read & Write access for Onder & OrderLine with the following XPath constraint: [System.owner= '[%CurentUser%]'], And full read access to the Product entity."
+        "t": "Read & Write access for Order & OrderLine with the following XPath constraint: [System.owner= '[%CurrentUser%]'], And full read access to the Product entity."
       },
       {
         "k": "D",
-        "t": "Mimic the Order & OrderLine entites with non-persistable entities. Grant the Anonymous user CRUD access to the non-persistable entities and full read access to the Product entity. The persistable Order and OnderLine objects are created in the microflow submitting the Order."
+        "t": "Mimic the Order & OrderLine entities with non-persistable entities. Grant the Anonymous user CRUD access to the non-persistable entities and full read access to the Product entity. The persistable Order and OrderLine objects are created in the microflow submitting the Order."
       }
     ],
     "ans": [
@@ -1468,7 +1468,7 @@
       },
       {
         "k": "D",
-        "t": "Ul can be used to improve UX"
+        "t": "UI can be used to improve UX"
       }
     ],
     "ans": [
@@ -1491,11 +1491,11 @@
     "opts": [
       {
         "k": "A",
-        "t": "When creating 3 sub-microfiow, you can choose whether you want to inherit the access rules from the parent microflow or to set it up independently."
+        "t": "When creating a sub-microflow, you can choose whether you want to inherit the access rules from the parent microflow or to set it up independently."
       },
       {
         "k": "B",
-        "t": "Access to a sub-microflow does not need to be set because itis handled by the parent microflow."
+        "t": "Access to a sub-microflow does not need to be set because it is handled by the parent microflow."
       },
       {
         "k": "C",
@@ -1594,7 +1594,7 @@
       },
       {
         "k": "B",
-        "t": "Use an enumeration to store all log node names as an enumeration value and use the expression getCaption ModuleName.EnumerationList.CustomLogNodeNamel to set the log node name."
+        "t": "Use an enumeration to store all log node names as an enumeration value and use the expression getCaption ModuleName.EnumerationList.CustomLogNodeName to set the log node name."
       },
       {
         "k": "C",
@@ -1660,15 +1660,15 @@
     "opts": [
       {
         "k": "A",
-        "t": "[formatdatetime(year(OrderDate) > 2000])]\n[OrderDate <1%CurrentDateTime%]]"
+        "t": "[formatdatetime(year(OrderDate) > 2000])]\n[OrderDate < '[%CurrentDateTime%]']"
       },
       {
         "k": "B",
-        "t": "[year(OrderDate) 2000]\n[OrderDate <1%CurrentDateTime%]]"
+        "t": "[year(OrderDate) 2000]\n[OrderDate < '[%CurrentDateTime%]']"
       },
       {
         "k": "C",
-        "t": "[year-from-dateTime(OrderDate) > 2000)\n[OrderDate <1%CurrentDateTime%]]"
+        "t": "[year-from-dateTime(OrderDate) > 2000]\n[OrderDate < '[%CurrentDateTime%]']"
       },
       {
         "k": "D",
@@ -1833,7 +1833,7 @@
       },
       {
         "k": "B",
-        "t": "Set a microfiow retrieving the orders of the user as a data source of the data grid widget."
+        "t": "Set a microflow retrieving the orders of the user as a data source of the data grid widget."
       },
       {
         "k": "C",
@@ -1895,7 +1895,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "[AdvancedModule.OrderLine Order/AdvancedModule.Order/Status = 'Draft]\nJAdvancedModule.OrderLine Order/AdvancedModule.Order/\nAdvancedModule.Order Customer/AdvancedModule.Customer/ System.owner '[%CurrentUser]']"
+        "t": "[AdvancedModule.OrderLine Order/AdvancedModule.Order/Status = 'Draft]\n[AdvancedModule.OrderLine_Order/AdvancedModule.Order/\nAdvancedModule.Order Customer/AdvancedModule.Customer/ System.owner '[%CurrentUser]']"
       },
       {
         "k": "B",
@@ -1994,11 +1994,11 @@
     "opts": [
       {
         "k": "A",
-        "t": "One object of type SAddress: Rotterdam or London."
+        "t": "One object of type $Address: Rotterdam or London."
       },
       {
         "k": "B",
-        "t": "Two objects of type SAddress: Rotterdam and London"
+        "t": "Two objects of type $Address: Rotterdam and London"
       },
       {
         "k": "C",
@@ -2126,7 +2126,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "Yes, because othenwise the object cannot be retrieved over association."
+        "t": "Yes, because otherwise the object cannot be retrieved over association."
       },
       {
         "k": "B",
@@ -2221,7 +2221,7 @@
   {
     "id": 66,
     "topic": "XPath & General",
-    "q": "You would like to replace an XPath that utes the logical 'or' operator with a microfiow using. two Retrieves and a List operation. Which of the following List operations should you use?",
+    "q": "You would like to replace an XPath that uses the logical 'or' operator with a microflow using two Retrieves and a List operation. Which of the following List operations should you use?",
     "opts": [
       {
         "k": "A",
@@ -2237,7 +2237,7 @@
       },
       {
         "k": "D",
-        "t": "Intersert"
+        "t": "Intersect"
       }
     ],
     "ans": [
@@ -2262,7 +2262,7 @@
       },
       {
         "k": "B",
-        "t": "In the microflow which commits the Order afterthe Order is entered."
+        "t": "In the microflow which commits the Order after the Order is entered."
       },
       {
         "k": "C",
@@ -2361,7 +2361,7 @@
       },
       {
         "k": "B",
-        "t": "True-You only need to assign allowed roles to unused microflows to make sure they are safe, you don't need to assign allowed roles to sub microflows because they inhent this from the parent microflow"
+        "t": "True-You only need to assign allowed roles to unused microflows to make sure they are safe, you don't need to assign allowed roles to sub microflows because they inherit this from the parent microflow"
       },
       {
         "k": "C",
@@ -2522,19 +2522,19 @@
     "opts": [
       {
         "k": "A",
-        "t": "By executing the comparison on the Customer object in a subquery, [Product [AdvancedModule. OrderLine_Product/AdvancedModule OrderLine/ AdvancedModule.Orderline_Order/AdvancedModule.order [AdvancedModule.Customer = SCustomer or AdvancedModule.Customer_ProductFavorite = $Customer])"
+        "t": "By executing the comparison on the Customer object in a subquery, [Product [AdvancedModule. OrderLine_Product/AdvancedModule OrderLine/ AdvancedModule.Orderline_Order/AdvancedModule.order [AdvancedModule.Customer = $Customer or AdvancedModule.Customer_ProductFavorite = $Customer])"
       },
       {
         "k": "B",
-        "t": "By executing the comparison on the Customer object in a subquery, the or statement can be changed to an and statement. which is better performing. //Product [AdvancedModule. OrderLine_Product/AdvancedModule Ordertine/ AdvancedModule.Ordertine Order [AdvancedModule.Order_Customer = SCustomer and AdvancedModule.Customer_ProductFavorite = $Customer)"
+        "t": "By executing the comparison on the Customer object in a subquery, the or statement can be changed to an and statement. which is better performing. //Product [AdvancedModule. OrderLine_Product/AdvancedModule OrderLine/ AdvancedModule.OrderLine Order [AdvancedModule.Order_Customer = $Customer and AdvancedModule.Customer_ProductFavorite = $Customer)"
       },
       {
         "k": "C",
-        "t": "By retrieving all Products from the database without a constraint. iterating through this list ProductList and retrieving the Customers who have the IteratorProduct on their favorite list and have ordered it. Check if this CustomerList contains the affected Customer, If itis 2 part of the CustomerList. then add the product on the ProductFinal list. f not. continue with the next IteratorProduct."
+        "t": "By retrieving all Products from the database without a constraint. iterating through this list ProductList and retrieving the Customers who have the IteratorProduct on their favorite list and have ordered it. Check if this CustomerList contains the affected Customer, If it is a part of the CustomerList, then add the product on the ProductFinal list. If not, continue with the next IteratorProduct."
       },
       {
         "k": "D",
-        "t": "By retrieving a list of already ordered products Productlist_Ordered and a list of favorite products ProductList_ Favorite separately, and joining them into a single list ProductList_Total. The ProductList_Ordered is achieved via the Retrieve from database activity with XPath: IADV20.0rderLine_Product/ADV20.0rderLine/ADV20.Ordertine_Order/ ADV20.0rder/ADV20.0rder_Customer= SCustomer] . The ProductList_Favorite is achieved via the Retrieve from database activity with XPath {ADV20.Customer_ProductFavorite = SCustomer). The ProductList_Total is obtained using the Union List operation applied to the ProductList_ Ordered and ProductList Favorite lists."
+        "t": "By retrieving a list of already ordered products ProductList_Ordered and a list of favorite products ProductList_Favorite separately, and joining them into a single list ProductList_Total. The ProductList_Ordered is achieved via the Retrieve from database activity with XPath: [ADV20.OrderLine_Product/ADV20.OrderLine/ADV20.Ordertine_Order/ ADV20.Order/ADV20.Order_Customer= $Customer] . The ProductList_Favorite is achieved via the Retrieve from database activity with XPath {ADV20.Customer_ProductFavorite = $Customer). The ProductList_Total is obtained using the Union List operation applied to the ProductList_ Ordered and ProductList Favorite lists."
       }
     ],
     "ans": [
@@ -2551,7 +2551,7 @@
   {
     "id": 76,
     "topic": "XPath & General",
-    "q": "You need a list of all products which are not on the current Order. The following XPath is used in a microflow to retrieve that list from the database. How can you optimize this XPath to increase the performance of the app?\n//Product[not(AdvancedModule Orderline Product/AdvancedModule Ordertine /AdvancedModule OrderLine Order SOrder)]",
+    "q": "You need a list of all products which are not on the current Order. The following XPath is used in a microflow to retrieve that list from the database. How can you optimize this XPath to increase the performance of the app?\n//Product[not(AdvancedModule Orderline Product/AdvancedModule OrderLine /AdvancedModule OrderLine Order $Order)]",
     "opts": [
       {
         "k": "A",
@@ -2567,7 +2567,7 @@
       },
       {
         "k": "D",
-        "t": "By separately retrieving two lists ProductList All and ProductList Referenced from database, and subtracting one from\nthe other to the ProductList_Final\nWhere the ProductList All is a list of all Products retrieved from\nthe database without constraints.\nThe ProductList Referenced is obtained by retrieving from\ndatabase the list of all referenced Products associated to the OrderLines of the affected Order by\nXPath(AdvancedModule.OrderLine Product/AdvancedModule.Or derline/AdvancedModule.OrderLine Order = $Order]\nProductList Final is achieved by applying the Subtract list operation to subtract the ProductList Referenced from ProductList All"
+        "t": "By separately retrieving two lists ProductList All and ProductList Referenced from database, and subtracting one from\nthe other to the ProductList_Final\nWhere the ProductList All is a list of all Products retrieved from\nthe database without constraints.\nThe ProductList Referenced is obtained by retrieving from\ndatabase the list of all referenced Products associated to the OrderLines of the affected Order by\nXPath(AdvancedModule.OrderLine Product/AdvancedModule.OrderLine/AdvancedModule.OrderLine Order = $Order]\nProductList Final is achieved by applying the Subtract list operation to subtract the ProductList Referenced from ProductList All"
       }
     ],
     "ans": [
@@ -2654,7 +2654,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "Create a list Orders ToBeCommitted before the loop. Add changed objects within the loop to Orders ToBeCommitted. Commit the OrdersToBeCommitted list after the loop."
+        "t": "Create a list OrdersToBeCommitted before the loop. Add changed objects within the loop to OrdersToBeCommitted. Commit the OrdersToBeCommitted list after the loop."
       },
       {
         "k": "B",
@@ -2666,7 +2666,7 @@
       },
       {
         "k": "D",
-        "t": "Create a list OrdersToBeCommitted before the loop. Add changed objects within the loop to Orders ToBeCommitted. Commit the OrderList list after the loop."
+        "t": "Create a list OrdersToBeCommitted before the loop. Add changed objects within the loop to OrdersToBeCommitted. Commit the OrderList list after the loop."
       }
     ],
     "ans": [
@@ -2683,7 +2683,7 @@
   {
     "id": 80,
     "topic": "XPath & General",
-    "q": "We have five trainees: two without registrations. one with a discount of 30, and two with discounts of 50. How many trainee objects will the following XPath retuin? [Training.Registration_Trainee/Trainin.Registration/Discount != 30]",
+    "q": "We have five trainees: two without registrations. one with a discount of 30, and two with discounts of 50. How many trainee objects will the following XPath return? [Training.Registration_Trainee/Training.Registration/Discount != 30]",
     "opts": [
       {
         "k": "A",
@@ -3194,7 +3194,7 @@
       },
       {
         "k": "D",
-        "t": "Usability is secunty, adding a conditional visibility on a page results in a secure app."
+        "t": "Usability is security, adding a conditional visibility on a page results in a secure app."
       }
     ],
     "ans": [
@@ -3215,7 +3215,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "Yellow cells indicate microfiows that have module roles assigned to them but are never used in the client API"
+        "t": "Yellow cells indicate microflows that have module roles assigned to them but are never used in the client API"
       },
       {
         "k": "B",
@@ -3409,7 +3409,7 @@
   {
     "id": 102,
     "topic": "XPath & General",
-    "q": "Which of these data sources is not supported in offine applications?",
+    "q": "Which of these data sources is not supported in offline applications?",
     "opts": [
       {
         "k": "A",
@@ -3689,7 +3689,7 @@
       },
       {
         "k": "D",
-        "t": "An object can only be created with a microfiow if ‘Apply entity access’ is set to ‘No’."
+        "t": "An object can only be created with a microflow if ‘Apply entity access’ is set to ‘No’."
       }
     ],
     "ans": [
@@ -4868,7 +4868,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "Correct: Since the attribute is non-localized, the exact value Jane selects will be stored in the database without any time zoneconversion."
+        "t": "Correct: Since the attribute is non-localized, the exact value Jane selects will be stored in the database without any time zone conversion."
       },
       {
         "k": "B",
@@ -4886,7 +4886,7 @@
     "ans": [
       "A"
     ],
-    "exp": "Giải thích (A): Đáp án chính xác là: Correct: Since the attribute is non-localized, the exact value Jane selects will be stored in the database without any time zoneconversion..",
+    "exp": "Giải thích (A): Đáp án chính xác là: Correct: Since the attribute is non-localized, the exact value Jane selects will be stored in the database without any time zone conversion..",
     "source": "Practice Test I"
   },
   {
@@ -8669,7 +8669,7 @@
       },
       {
         "k": "C",
-        "t": "Using a different module for this and giving it the suffix ‘_Impl’ clearly distinguishes it from core modules, improving main tainability"
+        "t": "Using a different module for this and giving it the suffix ‘_Impl’ clearly distinguishes it from core modules, improving maintainability"
       },
       {
         "k": "D",
@@ -9065,7 +9065,7 @@
       },
       {
         "k": "D",
-        "t": "Yes, a styling module will replace the styling in your <projectname>/theme. folder and the module that is set as most dominan t will contain the styling of your application."
+        "t": "Yes, a styling module will replace the styling in your <projectname>/theme. folder and the module that is set as most dominant will contain the styling of your application."
       }
     ],
     "ans": [
@@ -9261,13 +9261,13 @@
       },
       {
         "k": "D",
-        "t": "The ISV or enterprise decides what version of the Mendix Platform is used and updates of the solution core, the implementatio n team will update the extensions & customizations."
+        "t": "The ISV or enterprise decides what version of the Mendix Platform is used and updates of the solution core, the implementation team will update the extensions & customizations."
       }
     ],
     "ans": [
       "D"
     ],
-    "exp": "Giải thích (D): Đáp án chính xác là: The ISV or enterprise decides what version of the Mendix Platform is used and updates of the solution core, the implementatio n team will update the extensions & customizations..",
+    "exp": "Giải thích (D): Đáp án chính xác là: The ISV or enterprise decides what version of the Mendix Platform is used and updates of the solution core, the implementation team will update the extensions & customizations..",
     "source": "Learning Path"
   },
   {
@@ -9277,7 +9277,7 @@
     "opts": [
       {
         "k": "A",
-        "t": "An ISV or enterprise can determine their support lifecycle based on any version of the Mendix Platform and does not have to t ake the MTS and LTS cycle into account"
+        "t": "An ISV or enterprise can determine their support lifecycle based on any version of the Mendix Platform and does not have to take the MTS and LTS cycle into account"
       },
       {
         "k": "B",
@@ -9317,13 +9317,13 @@
       },
       {
         "k": "D",
-        "t": "The ISV or enterprise takes on the responsibility of the community supported content, possibly supported by the original uplo ader of the supported content"
+        "t": "The ISV or enterprise takes on the responsibility of the community supported content, possibly supported by the original uploader of the supported content"
       }
     ],
     "ans": [
       "D"
     ],
-    "exp": "Giải thích (D): Đáp án chính xác là: The ISV or enterprise takes on the responsibility of the community supported content, possibly supported by the original uplo ader of the supported content.",
+    "exp": "Giải thích (D): Đáp án chính xác là: The ISV or enterprise takes on the responsibility of the community supported content, possibly supported by the original uploader of the supported content.",
     "source": "Learning Path"
   },
   {
